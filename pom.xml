@@ -38,6 +38,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <image.registry></image.registry>
+    <image.version>${project.version}</image.version>
   </properties>
 
   <dependencies>
@@ -149,23 +150,10 @@ under the License.
             <adoc>DOUBLESLASH_STYLE</adoc>
           </mapping>
           <excludes>
-            <exclude>**/*.pem</exclude>
-            <exclude>**/*.p12</exclude>
-            <exclude>**/*.txt</exclude>
-            <exclude>**/*.xlsx</exclude>
             <exclude>**/*.idea</exclude>
             <exclude>**/*.adoc</exclude>
             <exclude>LICENSE</exclude>
             <exclude>**/target/**</exclude>
-            <exclude>**/src/license/**</exclude>
-            <exclude>**/generated/**</exclude>
-            <exclude>**/*.gitkeep</exclude>
-            <exclude>**/*.html</exclude>
-            <exclude>**/*.slim</exclude>
-            <exclude>**/*.xslt</exclude>
-            <exclude>**/minisite/**</exclude>
-            <exclude>**/frontend/**</exclude>
-            <exclude>**/.m2/**</exclude>
           </excludes>
         </configuration>
       </plugin>
@@ -207,7 +195,7 @@ under the License.
         <version>1.0.6-SNAPSHOT</version>
         <configuration>
           <usePackagedArtifact>true</usePackagedArtifact>
-          <to>${image.registry}ossyupiik/simple-http-server:latest</to>
+          <to>${image.registry}ossyupiik/simple-http-server:${image.version}</to>
           <graalVersion>22.2.0.r17</graalVersion>
           <buildStaticImage>false</buildStaticImage>
           <useLDD>true</useLDD>

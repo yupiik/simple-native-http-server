@@ -15,9 +15,20 @@ Port can be overridden with `PORT` environment variable and doc base with `DOC_B
 
 [source,bash]
 ----
-docker run --rm -p 8080:8080 -v /my/www:/my/www  ossyupiik/simple-http-server 8080 /my/www
+docker run --rm -p 8080:8080 -v /my/www:/my/www  ossyupiik/simple-http-server:$IMAGE_VERSION 8080 /my/www
 ----
 
 Then hit http://localhost:8080.
 
 TIP: depending your docker version you can need to set `--security-opt seccomp=unconfined` option.
+
+== Release
+
+The java release is a standard maven release (`mvn release:prepare release:perform`).
+
+NOTE: since the project uses Java 17, you must close/release the staging repository on OSS repository manually (we don't use the sonatype plugin).
+
+Then you can create and push the docker image following this process:
+
+. Clone the tag you created (or keep the build folder if you still have it),
+. Run `mvn package arthur:native-image arthur:image -Dimage.registry=docker.io/` (note: you can change registry if needed).
