@@ -208,7 +208,7 @@ under the License.
         <configuration>
           <usePackagedArtifact>true</usePackagedArtifact>
           <to>${image.registry}ossyupiik/simple-http-server:latest</to>
-          <graalVersion>22.2.0.r${maven.compiler.target}</graalVersion>
+          <graalVersion>22.2.0.r17</graalVersion>
           <buildStaticImage>false</buildStaticImage>
           <useLDD>true</useLDD>
           <includeNatives>false</includeNatives>
