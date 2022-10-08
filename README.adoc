@@ -1,0 +1,10 @@
+= Simple HTTP Server
+
+Intended to provide a light docker image embedding a tomcat serving a folder.
+
+== Configuration
+
+Configuration is done through image parameters.
+First one is the port (default to `8080`) and second one is the docbase (where static website is located - default to `/opt/yupiik/www`).
+
+Port can be overridden with `PORT` environment variable and doc base with `DOC_BASE` one.
