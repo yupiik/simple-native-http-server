@@ -8,3 +8,16 @@ Configuration is done through image parameters.
 First one is the port (default to `8080`) and second one is the docbase (where static website is located - default to `/opt/yupiik/www`).
 
 Port can be overridden with `PORT` environment variable and doc base with `DOC_BASE` one.
+
+== Sample usages
+
+=== Docker
+
+[source,bash]
+----
+docker run --rm -p 8080:8080 -v /my/www:/my/www  ossyupiik/simple-http-server 8080 /my/www
+----
+
+Then hit http://localhost:8080.
+
+TIP: depending your docker version you can need to set `--security-opt seccomp=unconfined` option.
