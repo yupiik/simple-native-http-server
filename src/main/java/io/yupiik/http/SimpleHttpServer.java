@@ -15,12 +15,13 @@
  */
 package io.yupiik.http;
 
-import io.yupiik.uship.webserver.tomcat.TomcatWebServer;
-import io.yupiik.uship.webserver.tomcat.TomcatWebServerConfiguration;
+import io.yupiik.fusion.http.server.api.WebServer;
+import io.yupiik.fusion.http.server.impl.tomcat.TomcatWebServer;
+import io.yupiik.fusion.http.server.impl.tomcat.TomcatWebServerConfiguration;
+import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.servlets.DefaultServlet;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import static java.util.Optional.ofNullable;
 
@@ -29,7 +30,7 @@ public final class SimpleHttpServer {
         // no-op
     }
 
-    public static void main(final String... args) throws InterruptedException {
+    public static void main(final String... args) {
         final var port = args.length < 1 ?
                 ofNullable(System.getenv("PORT")).map(Integer::parseInt).orElse(8080) :
                 Integer.parseInt(args[0]);
@@ -37,24 +38,22 @@ public final class SimpleHttpServer {
                 ofNullable(System.getenv("DOC_BASE")).orElse("/opt/yupiik/www") :
                 args[1];
 
-        final var configuration = new TomcatWebServerConfiguration();
-        configuration.setPort(port);
+        final var conf = WebServer.Configuration.of().port(port);
+        final var configuration = conf.unwrap(TomcatWebServerConfiguration.class);
         configuration.setContextCustomizers(List.of(c -> {
             c.setDocBase(docBase);
             c.addWelcomeFile("index.html");
         }));
         configuration.setInitializers(List.of((ignored, sc) -> sc.addServlet("default", new DefaultServlet()).addMapping("/")));
-        try (final var server = new TomcatWebServer(configuration)) {
-            server.create();
-            final var await = new CountDownLatch(1);
+        try (final var server = WebServer.of(configuration)) {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     server.close();
                 } finally {
-                    await.countDown();
+                    ((StandardServer) server.unwrap(TomcatWebServer.class).tomcat().getServer()).stopAwait();
                 }
             }, SimpleHttpServer.class.getName() + "-stop"));
-            await.await();
+            server.await();
         }
     }
 }
