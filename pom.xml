@@ -16,14 +16,12 @@
     under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.yupiik.http</groupId>
   <artifactId>simple-native-http-server</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Simple Native HTTP Server</name>
   <description>Simple Native Tomcat to server a static website.</description>
   <url>https://yupiik.github.io/simple-native-http-server/</url>
@@ -37,7 +35,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <image.registry></image.registry>
+    <image.registry />
     <image.version>${project.version}</image.version>
   </properties>
 
@@ -165,7 +163,7 @@ under the License.
         <executions>
           <execution>
             <id>audit-dependencies</id>
-            <phase/>
+            <phase />
             <goals>
               <goal>audit</goal>
             </goals>
@@ -220,6 +218,7 @@ under the License.
     <connection>scm:git:https://github.com/yupiik/simple-native-http-server.git</connection>
     <developerConnection>scm:git:https://github.com/yupiik/simple-native-http-server.git</developerConnection>
     <url>https://github.com/yupiik/simple-native-http-server.git</url>
+    <tag>simple-native-http-server-1.0.0</tag>
   </scm>
 
   <distributionManagement>
