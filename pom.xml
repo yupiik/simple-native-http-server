@@ -37,6 +37,7 @@
 
     <image.registry />
     <image.version>${project.version}</image.version>
+    <arthur.version>1.0.7</arthur.version>
   </properties>
 
   <dependencies>
@@ -107,7 +108,7 @@
         <version>3.0.1</version>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
-          <releaseProfiles>release</releaseProfiles>
+          <releaseProfiles>release,native</releaseProfiles>
         </configuration>
       </plugin>
       <plugin>
@@ -191,7 +192,7 @@ under the License.
         -->
         <groupId>org.apache.geronimo.arthur</groupId>
         <artifactId>arthur-maven-plugin</artifactId>
-        <version>1.0.7</version>
+        <version>${arthur.version}</version>
         <configuration>
           <usePackagedArtifact>true</usePackagedArtifact>
           <to>${image.registry}/ossyupiik/simple-http-server:${image.version}</to>
@@ -237,6 +238,49 @@ under the License.
 
   <profiles>
     <profile>
+      <id>native</id>
+      <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.geronimo.arthur</groupId>
+            <artifactId>arthur-maven-plugin</artifactId>
+            <version>${arthur.version}</version>
+            <executions>
+              <execution>
+                <id>native</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <usePackagedArtifact>true</usePackagedArtifact>
+              <to>${image.registry}/ossyupiik/simple-http-server:${image.version}</to>
+              <graalVersion>21.0.0</graalVersion>
+              <graalDownloadUrl>https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.0/graalvm-community-jdk-21.0.0_linux-x64_bin.tar.gz</graalDownloadUrl>
+              <buildStaticImage>false</buildStaticImage>
+              <useLDD>true</useLDD>
+              <includeNatives>false</includeNatives>
+              <fallbackMode>no</fallbackMode>
+              <enableAllSecurityServices>false</enableAllSecurityServices>
+              <scanningExcludedArtifacts>*</scanningExcludedArtifacts>
+              <main>io.yupiik.http.SimpleHttpServer</main>
+              <customOptions>
+                <customOption>-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager</customOption>
+                <customOption>-Djava.net.preferIPv4Stack=true</customOption>
+                <customOption>-Duser.language=en</customOption>
+                <customOption>-Duser.country=US</customOption>
+                <customOption>-Dfile.encoding=UTF-8</customOption>
+                <customeOption>-H:+UnlockExperimentalVMOptions</customeOption>
+              </customOptions>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>release</id>
       <activation>
         <activeByDefault>false</activeByDefault>
@@ -256,7 +300,7 @@ under the License.
               </execution>
             </executions>
             <configuration>
-              <source>11</source>
+              <source>21</source>
               <doclint>none</doclint>
               <encoding>UTF-8</encoding>
               <failOnError>false</failOnError>
