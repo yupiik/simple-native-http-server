@@ -151,11 +151,22 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 ]]></inlineHeader>
+              <useDefaultExcludes>true</useDefaultExcludes>
+              <includes>
+                <include>**/*.properties</include>
+                <include>**/*.java</include>
+                <include>**/*.xml</include>
+                <include>**/*.yaml</include>
+              </includes>
               <excludes>
-                <exclude>**/*.idea</exclude>
-                <exclude>**/*.adoc</exclude>
                 <exclude>LICENSE</exclude>
+                <exclude>**/*.adoc</exclude>
+                <exclude>**/*.idea</exclude>
                 <exclude>**/target/**</exclude>
+                <exclude>**/generated/**</exclude>
+                <exclude>**/minisite/**</exclude>
+                <exclude>**/file</exclude>
+                <exclude>**/.m2/**</exclude>
               </excludes>
             </licenseSet>
           </licenseSets>
