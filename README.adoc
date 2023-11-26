@@ -12,6 +12,18 @@ First one is the port (default to `8080`) and second one is the docbase (where s
 
 Port can be overridden with `PORT` environment variable and doc base with `DOC_BASE` one.
 
+By default the server will cache any static resource in memory, if you want to control the cache, tune the following environment variables:
+
+* `CACHE_TTL`: how long to keep in memory the cached data,
+* `CACHE_MAX_SIZE`: max size in kb of the cache,
+* `CACHE_MAX_OBJECT_SIZE`: max size in kb of each entry in the cache (`/20` compared to `CACHE_MAX_SIZE` is recommended).
+
+For performances, you can also tune the Tomcat protocol configuration:
+
+* `TOMCAT_ACCEPT_COUNT` backlog size,
+* `TOMCAT_PROCESSOR_CACHE` process cache size (recommended to be ~ the thread count),
+* `TOMCAT_MAX_THREADS` number of processor threads.
+
 == Sample usages
 
 === Docker

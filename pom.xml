@@ -210,7 +210,7 @@ under the License.
         <version>${arthur.version}</version>
         <configuration>
           <usePackagedArtifact>true</usePackagedArtifact>
-          <to>${image.registry}/ossyupiik/simple-http-server:${image.version}</to>
+          <to>${image.registry}ossyupiik/simple-http-server:${image.version}</to>
           <graalVersion>21.0.0</graalVersion>
           <graalDownloadUrl>https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.0/graalvm-community-jdk-21.0.0_linux-x64_bin.tar.gz</graalDownloadUrl>
           <buildStaticImage>false</buildStaticImage>
@@ -226,7 +226,7 @@ under the License.
             <customOption>-Duser.language=en</customOption>
             <customOption>-Duser.country=US</customOption>
             <customOption>-Dfile.encoding=UTF-8</customOption>
-            <customeOption>-H:+UnlockExperimentalVMOptions</customeOption>
+            <customOption>-H:+UnlockExperimentalVMOptions</customOption>
           </customOptions>
         </configuration>
       </plugin>

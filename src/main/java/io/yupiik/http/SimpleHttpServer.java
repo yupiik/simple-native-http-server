@@ -20,6 +20,8 @@ import io.yupiik.fusion.http.server.impl.tomcat.TomcatWebServer;
 import io.yupiik.fusion.http.server.impl.tomcat.TomcatWebServerConfiguration;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.servlets.DefaultServlet;
+import org.apache.catalina.webresources.StandardRoot;
+import org.apache.coyote.AbstractProtocol;
 
 import java.util.List;
 
@@ -43,6 +45,19 @@ public final class SimpleHttpServer {
         configuration.setContextCustomizers(List.of(c -> {
             c.setDocBase(docBase);
             c.addWelcomeFile("index.html");
+
+            // enable to cache all resources by default - tune it if the size is not controlled or there are big resources in a memory constrained environment
+            c.setResources(new StandardRoot());
+            c.getResources().setCacheTtl(ofNullable(System.getenv("CACHE_TTL")).map(Long::parseLong).orElse(Long.MAX_VALUE));
+            c.getResources().setCacheMaxSize(ofNullable(System.getenv("CACHE_MAX_SIZE")).map(Integer::parseInt).orElse(Integer.MAX_VALUE / 1024));
+            c.getResources().setCacheObjectMaxSize(ofNullable(System.getenv("CACHE_MAX_OBJECT_SIZE")).map(Integer::parseInt).orElse(Integer.MAX_VALUE / 20 / 1024));
+        }));
+        configuration.setTomcatCustomizers(List.of(t -> {
+            if (t.getConnector().getProtocolHandler() instanceof AbstractProtocol<?> ap) {
+                ofNullable(System.getenv("TOMCAT_ACCEPT_COUNT")).map(Integer::parseInt).ifPresent(ap::setAcceptCount);
+                ofNullable(System.getenv("TOMCAT_PROCESSOR_CACHE")).map(Integer::parseInt).ifPresent(ap::setProcessorCache);
+                ofNullable(System.getenv("TOMCAT_MAX_THREADS")).map(Integer::parseInt).ifPresent(ap::setMaxThreads);
+            }
         }));
         configuration.setInitializers(List.of((ignored, sc) -> sc.addServlet("default", new DefaultServlet()).addMapping("/")));
         try (final var server = WebServer.of(configuration)) {
