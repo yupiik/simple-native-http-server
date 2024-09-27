@@ -38,6 +38,7 @@
     <image.registry />
     <image.version>${project.version}</image.version>
     <arthur.version>1.0.8</arthur.version>
+    <tomcat.version>10.1.29</tomcat.version>
   </properties>
 
   <dependencies>
@@ -45,6 +46,11 @@
       <groupId>io.yupiik.fusion</groupId>
       <artifactId>fusion-http-server</artifactId>
       <version>1.0.18</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-catalina</artifactId>
+      <version>${tomcat.version}</version>
     </dependency>
 
     <dependency>
