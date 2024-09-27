@@ -44,7 +44,7 @@
     <dependency>
       <groupId>io.yupiik.fusion</groupId>
       <artifactId>fusion-http-server</artifactId>
-      <version>1.0.11</version>
+      <version>1.0.18</version>
     </dependency>
 
     <dependency>
