@@ -37,7 +37,7 @@
 
     <image.registry />
     <image.version>${project.version}</image.version>
-    <arthur.version>1.0.7</arthur.version>
+    <arthur.version>1.0.8</arthur.version>
   </properties>
 
   <dependencies>
