@@ -38,14 +38,16 @@
     <image.registry />
     <image.version>${project.version}</image.version>
     <arthur.version>1.0.8</arthur.version>
-    <tomcat.version>10.1.29</tomcat.version>
+    <tomcat.version>10.1.31</tomcat.version>
+    <fusion.version>1.0.21</fusion.version>
+    <yupiik-logging.version>1.0.8</yupiik-logging.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>io.yupiik.fusion</groupId>
       <artifactId>fusion-http-server</artifactId>
-      <version>1.0.18</version>
+      <version>${fusion.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.tomcat</groupId>
@@ -56,7 +58,7 @@
     <dependency>
       <groupId>io.yupiik.logging</groupId>
       <artifactId>yupiik-logging-jul</artifactId>
-      <version>1.0.8</version>
+      <version>${yupiik-logging.version}</version>
     </dependency>
   </dependencies>
 
