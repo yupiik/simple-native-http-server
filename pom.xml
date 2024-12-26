@@ -37,7 +37,7 @@
 
     <image.registry />
     <image.version>${project.version}</image.version>
-    <arthur.version>1.0.8</arthur.version>
+    <arthur.version>1.0.9</arthur.version>
     <tomcat.version>10.1.34</tomcat.version>
     <fusion.version>1.0.22</fusion.version>
     <yupiik-logging.version>1.0.8</yupiik-logging.version>
@@ -75,7 +75,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>3.13.0</version>
         <configuration>
           <source>21</source>
           <target>21</target>
@@ -87,7 +87,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.5.2</version>
         <configuration>
           <trimStackTrace>false</trimStackTrace>
           <systemPropertyVariables>
@@ -100,7 +100,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -113,7 +113,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.1.1</version>
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <releaseProfiles>release,native</releaseProfiles>
@@ -127,7 +127,7 @@
       <plugin>
         <groupId>com.mycila</groupId>
         <artifactId>license-maven-plugin</artifactId>
-        <version>4.2</version>
+        <version>4.5</version>
         <executions>
           <execution>
             <id>check-license</id>
@@ -313,7 +313,7 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.6.0</version>
+            <version>3.8.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -332,7 +332,7 @@ under the License.
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.4</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
