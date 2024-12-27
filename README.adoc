@@ -3,16 +3,16 @@
 image::https://img.shields.io/maven-central/v/io.yupiik.http/simple-native-http-server?color=00b2ef&label=Last%20Release&logoColor=00b2ef&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAACAAAAAqCAYAAADS4VmSAAAAAXNSR0IArs4c6QAABGdJREFUWEedmF2I3FQUx%2F9nZrYzq7ttMtuK32B90WpFEbtUW2T7UqqbjIgM%2BKQP%2BmAfBUEFP0H7oo%2BiIgg%2BqRUqk%2BwWRXTFj9UWoVIp7UN1H9QitTvJMtpOd3dydDI7k9zk3syd5C25557zO1%2F3I4S8z3xzJzp0MpweBDfioanf86iiPJPCOY7HwlzbzKUr1yQ4XgAgOZdhm4VRHcoLIHrft5ojCqMDiKF%2FGlQkcOfNgecjQowGcKS5ByX6NmUsDrXOe%2FFw9TvdVIwGEDdUNiawn%2F4NDR0%2BP4HKWCtPFPQBXP8EmO9UGonDEf0My7hLJwr6AHEDqjzryCSo9ACEtuM%2FYVevl3rneH8D2LoxptWWugBR2w2r8hGjMBxAaDt6BrbxRmZuHf81gJ%2FXLchsgEbzQRDN6SobyMWhmWdRq86roLMB4ooKVMWs4Q0Uuf4jYP4kfKfONKytxwdjR1vbsL5%2BXgdcDeD6J8G8U6vtukLJ2hDb8hdYxh2yKKgBsorJ9QJwYjMiMKzEZqRRkHKAhrcKwliPmC7ANrYN6A%2Bf2oTKtZelOW1%2FUUK93oml6RKYK%2BE7Yw01c1NyXhpggSto%2BZe0Qh%2FgMQBFFPC%2BlvykMY4Zasch0gBC4RUfx%2BzmDwYT5lem0Ql%2BTBkTWjW4HfbUqVhHvALgRRWgCDDXmkGw%2FpWWN%2BXLE9h%2FdW8z%2BtQzUETUIVkFWSjtw%2BzkQt%2BGCBD3pG2UUKcon43mCRBpbkZYhGXeF9UNj6PiX5Q5FgE4zUWAdmt5n2czEtLEP8Cu3huWeCxX6vVenHwadnWHtAsc7zcAN43iRA9gmAGNftZ05A8A18UBCQtcQstf06JmfhS16kdS7%2FsfHf9ZgA9p6Zs0xkjwngsHUNvyWeTNch0ofKxUpiIRNiO6BzXjp4Fow38OxK9HXZC8YDAfRK36dio1JaOCB0i%2BAiZBjvx1FcbKn8MyxWOZ670MxkviQuR4vwLYnnKG2QeRsfG9A9ssZYY%2Ba9BpXgRoPCVCWOwVoXvhFnDxtFLHsFOQTirS1rfDNpbSS3HD64Agv2JR8VZYm88MKcJ9AH8plWEEqJlFMQVq%2Bq8B3K8Y%2Fga2KY45XrfQ7s6Ea%2F9zBeo3RBud5IIJzPmmePJZ2QUOjuXKf6GzA0FpL8DvqjpJTIG7%2FCq48EIoTPQULOMdwXCyY%2BRU6eO4cDrCDCyzG92eGaUBWeE5%2FlsAH8yMBvMh1KrRqbgvrFhNIwDXOwfGNdJQOZ4PYMtIaWAso2b2LynJHxrHYZvTsQgwwfG7Px16T9f7bi0E3FQbDZ4ECu%2BF490lmuhDpWz%2FIiuJgmQzoiWAox1N1LoK2yyHn5zlJ2IA0dnf9dfArFq0ugeYK%2BOOSgAkfhBcWKYt1osCoC%2Fk%2BsfAvCszbbZJQwCC3bCnojNgXJsqAkmLzsoBIDgqBRkAuP5ZMN88EGqfK6N%2B22omvS5AX8nCUgUtI74IfQ%2Fb3DP8cqqiGBVAoSc%2FQFiIG%2F8K825W%2F%2Bv4D2sg4qMfRFPFAAAAAElFTkSuQmCC[]
 image::https://github.com/yupiik/simple-native-http-server/actions/workflows/maven.yml/badge.svg?branch=master[Github CI]
 
-Intended to provide a light docker image embedding a tomcat serving a folder.
+Intended to provide a light docker image embedding an Apache Tomcat serving a folder.
 
 == Configuration
 
 Configuration is done through image parameters.
-First one is the port (default to `8080`) and second one is the docbase (where static website is located - default to `/opt/yupiik/www`).
+First one is the port (default to `8080`) and second one is the doc base (where static website is located - default to `/opt/yupiik/www`).
 
 Port can be overridden with `PORT` environment variable and doc base with `DOC_BASE` one.
 
-By default the server will cache any static resource in memory, if you want to control the cache, tune the following environment variables:
+By default, the server will cache any static resource in memory, if you want to control the cache, tune the following environment variables:
 
 * `CACHE_TTL`: how long to keep in memory the cached data,
 * `CACHE_MAX_SIZE`: max size in kb of the cache,
@@ -30,18 +30,18 @@ For performances, you can also tune the Tomcat protocol configuration:
 
 [source,bash]
 ----
-docker run --rm -p 8080:8080 -v /my/www:/my/www  ossyupiik/simple-http-server:$IMAGE_VERSION 8080 /my/www
+docker run --rm -p 8080:8080 -v /home/user/local/www:/opt/my-website/www  ossyupiik/simple-http-server:$IMAGE_VERSION 8080 /opt/my-website/www
 ----
 
 Then hit http://localhost:8080.
 
-TIP: depending your docker version you can need to set `--security-opt seccomp=unconfined` option.
+TIP: depending on your docker version you can need to set `--security-opt seccomp=unconfined` option.
 
 == Release
 
 The java release is a standard maven release (`mvn release:prepare release:perform`).
 
-NOTE: since the project uses Java 17, you must close/release the staging repository on OSS repository manually (we don't use the sonatype plugin).
+NOTE: since the project uses Java 21, you must close/release the staging repository on OSS repository manually (we don't use the sonatype plugin).
 
 Then you can create and push the docker image following this process:
 
