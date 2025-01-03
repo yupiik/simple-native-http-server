@@ -296,7 +296,7 @@ under the License.
                 <customOption>-Duser.language=en</customOption>
                 <customOption>-Duser.country=US</customOption>
                 <customOption>-Dfile.encoding=UTF-8</customOption>
-                <customeOption>-H:+UnlockExperimentalVMOptions</customeOption>
+                <customOption>-H:+UnlockExperimentalVMOptions</customOption>
               </customOptions>
             </configuration>
           </plugin>
