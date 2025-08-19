@@ -38,8 +38,8 @@
     <image.registry />
     <image.version>${project.version}</image.version>
     <arthur.version>1.0.9</arthur.version>
-    <tomcat.version>10.1.34</tomcat.version>
-    <fusion.version>1.0.22</fusion.version>
+    <tomcat.version>11.0.10</tomcat.version>
+    <fusion.version>1.0.28</fusion.version>
     <yupiik-logging.version>1.0.8</yupiik-logging.version>
   </properties>
 
