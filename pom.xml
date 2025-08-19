@@ -21,7 +21,7 @@
 
   <groupId>io.yupiik.http</groupId>
   <artifactId>simple-native-http-server</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
   <name>Simple Native HTTP Server</name>
   <description>Simple Native Tomcat to server a static website.</description>
   <url>https://yupiik.github.io/simple-native-http-server/</url>
