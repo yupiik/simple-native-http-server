@@ -16,136 +16,152 @@
     under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.yupiik.http</groupId>
-  <artifactId>simple-native-http-server</artifactId>
-  <version>1.0.2</version>
-  <name>Simple Native HTTP Server</name>
-  <description>Simple Native Tomcat to server a static website.</description>
-  <url>https://yupiik.github.io/simple-native-http-server/</url>
+    <groupId>io.yupiik.http</groupId>
+    <artifactId>simple-native-http-server</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+    <name>Simple Native HTTP Server</name>
+    <description>Simple Native Tomcat to server a static website.</description>
+    <url>https://yupiik.github.io/simple-native-http-server/</url>
 
-  <organization>
-    <name>Yupiik SAS</name>
-    <url>https://www.yupiik.com</url>
-  </organization>
-  <inceptionYear>2021 - present</inceptionYear>
+    <organization>
+        <name>Yupiik SAS</name>
+        <url>https://www.yupiik.com</url>
+    </organization>
+    <inceptionYear>2021 - present</inceptionYear>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <image.registry />
-    <image.version>${project.version}</image.version>
-    <arthur.version>1.0.9</arthur.version>
-    <tomcat.version>11.0.10</tomcat.version>
-    <fusion.version>1.0.28</fusion.version>
-    <yupiik-logging.version>1.0.8</yupiik-logging.version>
-  </properties>
+        <image.registry/>
+        <image.version>${project.version}</image.version>
+        <arthur.version>1.0.9</arthur.version>
+        <tomcat.version>11.0.10</tomcat.version>
+        <fusion.version>1.0.28</fusion.version>
+        <yupiik-logging.version>1.0.8</yupiik-logging.version>
+    </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>io.yupiik.fusion</groupId>
-      <artifactId>fusion-http-server</artifactId>
-      <version>${fusion.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>tomcat-catalina</artifactId>
-      <version>${tomcat.version}</version>
-    </dependency>
+    <dependencies>
+        <dependency>
+            <groupId>io.yupiik.fusion</groupId>
+            <artifactId>fusion-http-server</artifactId>
+            <version>${fusion.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
 
-    <dependency>
-      <groupId>io.yupiik.logging</groupId>
-      <artifactId>yupiik-logging-jul</artifactId>
-      <version>${yupiik-logging.version}</version>
-    </dependency>
-  </dependencies>
+        <dependency>
+            <groupId>io.yupiik.logging</groupId>
+            <artifactId>yupiik-logging-jul</artifactId>
+            <version>${yupiik-logging.version}</version>
+        </dependency>
+    </dependencies>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.14.0</version>
-        <configuration>
-          <source>21</source>
-          <target>21</target>
-          <release>21</release>
-          <encoding>UTF-8</encoding>
-          <parameters>true</parameters>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.3</version>
-        <configuration>
-          <trimStackTrace>false</trimStackTrace>
-          <systemPropertyVariables>
-            <java.util.logging.manager>io.yupiik.logging.jul.YupiikLogManager</java.util.logging.manager>
-            <yupiik.tomcat.port>0</yupiik.tomcat.port>
-            <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.3.1</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>3.1.1</version>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <releaseProfiles>release,native</releaseProfiles>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.21.0</version>
-      </plugin>
-      <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>4.5</version>
-        <executions>
-          <execution>
-            <id>check-license</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <inherited>false</inherited>
-        <configuration>
-          <aggregate>true</aggregate>
-          <mapping>
-            <adoc>DOUBLESLASH_STYLE</adoc>
-          </mapping>
-          <licenseSets>
-            <licenseSet>
-              <inlineHeader><![CDATA[Copyright (c) ${project.inceptionYear} - ${project.organization.name} - ${project.organization.url}
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <release>21</release>
+                    <encoding>UTF-8</encoding>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <trimStackTrace>false</trimStackTrace>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>io.yupiik.logging.jul.YupiikLogManager</java.util.logging.manager>
+                        <yupiik.tomcat.port>0</yupiik.tomcat.port>
+                        <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <releaseProfiles>release,native</releaseProfiles>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>net.nicoulaj.maven.plugins</groupId>
+                <artifactId>checksum-maven-plugin</artifactId>
+                <version>1.11</version>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.21.0</version>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>4.5</version>
+                <executions>
+                    <execution>
+                        <id>check-license</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <inherited>false</inherited>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <mapping>
+                        <adoc>DOUBLESLASH_STYLE</adoc>
+                    </mapping>
+                    <licenseSets>
+                        <licenseSet>
+                            <inlineHeader><![CDATA[Copyright (c) ${project.inceptionYear} - ${project.organization.name} - ${project.organization.url}
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance
 with the License.  You may obtain a copy of the License at
@@ -159,219 +175,247 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 ]]></inlineHeader>
-              <useDefaultExcludes>true</useDefaultExcludes>
-              <includes>
-                <include>**/*.properties</include>
-                <include>**/*.java</include>
-                <include>**/*.xml</include>
-                <include>**/*.yaml</include>
-              </includes>
-              <excludes>
-                <exclude>LICENSE</exclude>
-                <exclude>**/*.adoc</exclude>
-                <exclude>**/*.idea</exclude>
-                <exclude>**/target/**</exclude>
-                <exclude>**/generated/**</exclude>
-                <exclude>**/minisite/**</exclude>
-                <exclude>**/file</exclude>
-                <exclude>**/.m2/**</exclude>
-              </excludes>
-            </licenseSet>
-          </licenseSets>
-        </configuration>
-      </plugin>
-      <plugin><!--  mvn ossindex:audit -->
-        <groupId>org.sonatype.ossindex.maven</groupId>
-        <artifactId>ossindex-maven-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>audit-dependencies</id>
-            <phase />
-            <goals>
-              <goal>audit</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <scope>compile,runtime</scope>
-        </configuration>
-      </plugin>
-      <plugin>
-        <!--
-        IMPORTANT: build on a linux amd64 machine.
+                            <useDefaultExcludes>true</useDefaultExcludes>
+                            <includes>
+                                <include>**/*.properties</include>
+                                <include>**/*.java</include>
+                                <include>**/*.xml</include>
+                                <include>**/*.yaml</include>
+                            </includes>
+                            <excludes>
+                                <exclude>LICENSE</exclude>
+                                <exclude>**/*.adoc</exclude>
+                                <exclude>**/*.idea</exclude>
+                                <exclude>**/target/**</exclude>
+                                <exclude>**/generated/**</exclude>
+                                <exclude>**/minisite/**</exclude>
+                                <exclude>**/file</exclude>
+                                <exclude>**/.m2/**</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+            </plugin>
+            <plugin><!--  mvn ossindex:audit -->
+                <groupId>org.sonatype.ossindex.maven</groupId>
+                <artifactId>ossindex-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>audit-dependencies</id>
+                        <phase/>
+                        <goals>
+                            <goal>audit</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scope>compile,runtime</scope>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--
+                IMPORTANT: build on a linux amd64 machine.
 
-        Build native binary:
-        $ mvn package arthur:native-image
+                Build native binary:
+                $ mvn package arthur:native-image
 
-        Create local docker image:
-        $ mvn package arthur:native-image arthur:docker
+                Create local docker image:
+                $ mvn package arthur:native-image arthur:docker
 
-        Create registry image:
-        $ mvn package arthur:native-image arthur:image -Dimage.registry=docker.io/
+                Create registry image:
+                $ mvn package arthur:native-image arthur:image -Dimage.registry=docker.io/
 
-        NOTE: depending docker version you can need to disable the confinement:
-        $ docker run - -security-opt seccomp=unconfined -v /tmp/www:/tmp/www  ossyupiik/simple-http-server 8080 /tmp/www
-        -->
-        <groupId>org.apache.geronimo.arthur</groupId>
-        <artifactId>arthur-maven-plugin</artifactId>
-        <version>${arthur.version}</version>
-        <configuration>
-          <usePackagedArtifact>true</usePackagedArtifact>
-          <to>${image.registry}ossyupiik/simple-http-server:${image.version}</to>
-          <graalVersion>21.0.2</graalVersion>
-          <graalDownloadUrl>https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz</graalDownloadUrl>
-          <buildStaticImage>false</buildStaticImage>
-          <useLDD>true</useLDD>
-          <includeNatives>false</includeNatives>
-          <fallbackMode>no</fallbackMode>
-          <enableAllSecurityServices>false</enableAllSecurityServices>
-          <scanningExcludedArtifacts>*</scanningExcludedArtifacts>
-          <main>io.yupiik.http.SimpleHttpServer</main>
-          <customOptions>
-            <customOption>-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager</customOption>
-            <customOption>-Djava.net.preferIPv4Stack=true</customOption>
-            <customOption>-Duser.language=en</customOption>
-            <customOption>-Duser.country=US</customOption>
-            <customOption>-Dfile.encoding=UTF-8</customOption>
-            <customOption>-H:+UnlockExperimentalVMOptions</customOption>
-          </customOptions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
-  <scm>
-    <connection>scm:git:https://github.com/yupiik/simple-native-http-server.git</connection>
-    <developerConnection>scm:git:https://github.com/yupiik/simple-native-http-server.git</developerConnection>
-    <url>https://github.com/yupiik/simple-native-http-server.git</url>
-    <tag>HEAD</tag>
-  </scm>
-
-  <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository>
-  </distributionManagement>
-
-  <profiles>
-    <profile>
-      <id>native</id>
-      <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.geronimo.arthur</groupId>
-            <artifactId>arthur-maven-plugin</artifactId>
-            <version>${arthur.version}</version>
-            <executions>
-              <execution>
-                <id>native</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>native-image</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <usePackagedArtifact>true</usePackagedArtifact>
-              <to>${image.registry}/ossyupiik/simple-http-server:${image.version}</to>
-              <graalVersion>21.0.2</graalVersion>
-              <graalDownloadUrl>https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz</graalDownloadUrl>
-              <buildStaticImage>false</buildStaticImage>
-              <useLDD>true</useLDD>
-              <includeNatives>false</includeNatives>
-              <fallbackMode>no</fallbackMode>
-              <enableAllSecurityServices>false</enableAllSecurityServices>
-              <scanningExcludedArtifacts>*</scanningExcludedArtifacts>
-              <main>io.yupiik.http.SimpleHttpServer</main>
-              <customOptions>
-                <customOption>-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager</customOption>
-                <customOption>-Djava.net.preferIPv4Stack=true</customOption>
-                <customOption>-Duser.language=en</customOption>
-                <customOption>-Duser.country=US</customOption>
-                <customOption>-Dfile.encoding=UTF-8</customOption>
-                <customOption>-H:+UnlockExperimentalVMOptions</customOption>
-              </customOptions>
-            </configuration>
-          </plugin>
+                NOTE: depending docker version you can need to disable the confinement:
+                $ docker run - -security-opt seccomp=unconfined -v /tmp/www:/tmp/www  ossyupiik/simple-http-server 8080 /tmp/www
+                -->
+                <groupId>org.apache.geronimo.arthur</groupId>
+                <artifactId>arthur-maven-plugin</artifactId>
+                <version>${arthur.version}</version>
+                <configuration>
+                    <usePackagedArtifact>true</usePackagedArtifact>
+                    <to>${image.registry}ossyupiik/simple-http-server:${image.version}</to>
+                    <graalVersion>21.0.2</graalVersion>
+                    <graalDownloadUrl>
+                        https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz
+                    </graalDownloadUrl>
+                    <buildStaticImage>false</buildStaticImage>
+                    <useLDD>true</useLDD>
+                    <includeNatives>false</includeNatives>
+                    <fallbackMode>no</fallbackMode>
+                    <enableAllSecurityServices>false</enableAllSecurityServices>
+                    <scanningExcludedArtifacts>*</scanningExcludedArtifacts>
+                    <main>io.yupiik.http.SimpleHttpServer</main>
+                    <customOptions>
+                        <customOption>-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager</customOption>
+                        <customOption>-Djava.net.preferIPv4Stack=true</customOption>
+                        <customOption>-Duser.language=en</customOption>
+                        <customOption>-Duser.country=US</customOption>
+                        <customOption>-Dfile.encoding=UTF-8</customOption>
+                        <customOption>-H:+UnlockExperimentalVMOptions</customOption>
+                    </customOptions>
+                </configuration>
+            </plugin>
         </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>release</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.10.1</version>
-            <executions>
-              <execution>
-                <id>attach-javadocs</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <source>21</source>
-              <doclint>none</doclint>
-              <encoding>UTF-8</encoding>
-              <failOnError>false</failOnError>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.2.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+    </build>
 
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <url>https://github.com/yupiik/simple-native-http-server/blob/master/LICENSE</url>
-      <distribution>may be downloaded from the Maven repository</distribution>
-    </license>
-  </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/yupiik/simple-native-http-server.git</connection>
+        <developerConnection>scm:git:https://github.com/yupiik/simple-native-http-server.git</developerConnection>
+        <url>https://github.com/yupiik/simple-native-http-server.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
-  <developers>
-    <developer>
-      <name>Romain Manni-Bucau</name>
-      <id>rmannibucau</id>
-      <roles>
-        <role>Contributor</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-    <developer>
-      <name>Francois Papon</name>
-      <id>fpapon</id>
-      <roles>
-        <role>Contributor</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <finalName>${project.artifactId}</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.geronimo.arthur</groupId>
+                        <artifactId>arthur-maven-plugin</artifactId>
+                        <version>${arthur.version}</version>
+                        <executions>
+                            <execution>
+                                <id>native</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>native-image</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <usePackagedArtifact>true</usePackagedArtifact>
+                            <to>${image.registry}/ossyupiik/simple-http-server:${image.version}</to>
+                            <graalVersion>21.0.2</graalVersion>
+                            <graalDownloadUrl>
+                                https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz
+                            </graalDownloadUrl>
+                            <buildStaticImage>false</buildStaticImage>
+                            <useLDD>true</useLDD>
+                            <includeNatives>false</includeNatives>
+                            <fallbackMode>no</fallbackMode>
+                            <enableAllSecurityServices>false</enableAllSecurityServices>
+                            <scanningExcludedArtifacts>*</scanningExcludedArtifacts>
+                            <main>io.yupiik.http.SimpleHttpServer</main>
+                            <customOptions>
+                                <customOption>-Djava.util.logging.manager=io.yupiik.logging.jul.YupiikLogManager
+                                </customOption>
+                                <customOption>-Djava.net.preferIPv4Stack=true</customOption>
+                                <customOption>-Duser.language=en</customOption>
+                                <customOption>-Duser.country=US</customOption>
+                                <customOption>-Dfile.encoding=UTF-8</customOption>
+                                <customOption>-H:+UnlockExperimentalVMOptions</customOption>
+                            </customOptions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.10.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <source>21</source>
+                            <doclint>none</doclint>
+                            <encoding>UTF-8</encoding>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.6</version>
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--digest-algo=SHA512</arg>
+                            </gpgArguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.nicoulaj.maven.plugins</groupId>
+                        <artifactId>checksum-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>source-release-checksum</id>
+                                <goals>
+                                    <goal>artifacts</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <algorithms>
+                                <algorithm>SHA-512</algorithm>
+                            </algorithms>
+                            <csvSummary>false</csvSummary>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://github.com/yupiik/simple-native-http-server/blob/master/LICENSE</url>
+            <distribution>may be downloaded from the Maven repository</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Romain Manni-Bucau</name>
+            <id>rmannibucau</id>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+        <developer>
+            <name>Francois Papon</name>
+            <id>fpapon</id>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
 </project>
